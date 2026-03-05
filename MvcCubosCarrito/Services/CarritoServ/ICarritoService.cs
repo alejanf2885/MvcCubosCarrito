@@ -4,10 +4,11 @@ namespace MvcCubosCarrito.Services.CarritoServ
 {
     public interface ICarritoService
     {
-        Task<bool> AddCubo(int id);
+        Task<bool> AddCuboAsync(int id);
 
-        Task<bool> DeleteCubo(int id);
+        Task<bool> DeleteCuboAsync(int id);
 
         Carrito GetCarrito();
+
     }
 }

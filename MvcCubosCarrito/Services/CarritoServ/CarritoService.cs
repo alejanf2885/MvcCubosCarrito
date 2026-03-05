@@ -21,7 +21,7 @@ namespace MvcCubosCarrito.Services.CarritoServ
             this._cuboRepository = cuboRepository;
         }
 
-        public async Task<bool> AddCubo(int id)
+        public async Task<bool> AddCuboAsync(int id)
         {
 
             Cubo cubo = await this._cuboRepository.GetCuboAsync(id);
@@ -37,8 +37,13 @@ namespace MvcCubosCarrito.Services.CarritoServ
                 List<CuboCarrito> cubos = new List<CuboCarrito>();
 
                 cuboCarrito.Id = cubo.Id;
-                cuboCarrito.Cantidad = cuboCarrito.Cantidad + 1;
-                cuboCarrito.Precio = cuboCarrito.Cantidad * cuboCarrito.Precio;
+                cuboCarrito.Nombre = cubo.Nombre;
+                cuboCarrito.Modelo = cubo.Modelo;
+                cuboCarrito.Marca = cubo.Marca;
+                cuboCarrito.Imagen = cubo.Imagen;
+                cuboCarrito.Precio = cubo.Precio;
+                cuboCarrito.Cantidad = 1;
+                cuboCarrito.PrecioTotal = cubo.Precio * 1;
 
                 carrito.cubos = cubos;
                 carrito.cubos.Add(cuboCarrito);
@@ -59,7 +64,7 @@ namespace MvcCubosCarrito.Services.CarritoServ
                 {
                     carrito.cubos.Remove(cuboCarrito);
                     cuboCarrito.Cantidad = cuboCarrito.Cantidad + 1;
-                    cuboCarrito.Precio = cuboCarrito.Cantidad * cuboCarrito.Precio;
+                    cuboCarrito.PrecioTotal = cuboCarrito.Precio * cuboCarrito.Cantidad;
 
                     carrito.cubos.Add(cuboCarrito);
 
@@ -75,8 +80,13 @@ namespace MvcCubosCarrito.Services.CarritoServ
 
 
                     cuboCarrito.Id = cubo.Id;
-                    cuboCarrito.Cantidad = cuboCarrito.Cantidad + 1;
-                    cuboCarrito.Precio = cuboCarrito.Cantidad * cuboCarrito.Precio;
+                    cuboCarrito.Nombre = cubo.Nombre;
+                    cuboCarrito.Modelo = cubo.Modelo;
+                    cuboCarrito.Marca = cubo.Marca;
+                    cuboCarrito.Imagen = cubo.Imagen;
+                    cuboCarrito.Precio = cubo.Precio;
+                    cuboCarrito.Cantidad = 1;
+                    cuboCarrito.PrecioTotal = cubo.Precio * 1;
 
                     carrito.cubos.Add(cuboCarrito);
 
@@ -93,7 +103,7 @@ namespace MvcCubosCarrito.Services.CarritoServ
 
         }
 
-        public Task<bool> DeleteCubo(int id)
+        public Task<bool> DeleteCuboAsync(int id)
         {
             throw new NotImplementedException();
         }

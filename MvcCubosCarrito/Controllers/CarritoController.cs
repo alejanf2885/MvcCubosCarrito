@@ -16,8 +16,17 @@ namespace MvcCubosCarrito.Controllers
         public async Task<IActionResult> Index()
         {
             Carrito carrito = this._carritoService.GetCarrito();
+            ViewData["Total"] = carrito.cubos.Sum(z => z.PrecioTotal);
 
             return View(carrito);
+        }
+
+        
+        public async Task<IActionResult> DeleteCuboCarrito(int id)
+        {
+            await this._carritoService.DeleteCuboAsync(id);
+
+            return RedirectToAction("Index");
         }
     }
 }

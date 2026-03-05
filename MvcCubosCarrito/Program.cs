@@ -20,7 +20,7 @@ builder.Services.AddSession();
 builder.Services.AddTransient<ICuboRepository, CuboRepository>();
 
 // Services
-builder.Services.AddTransient<ICarritoService, CarritoService>();
+builder.Services.AddTransient<ICarritoService, CarritoServiceSession>();
 builder.Services.AddTransient<ICuboService, CuboService>();
 
 

@@ -10,7 +10,7 @@ namespace MvcCubosCarrito.Repositories.CubosRepo
         Task<Cubo> GetCuboAsync(int id);
 
         Task<bool> InsertCuboAsync
-            (string nombre, string modelo, string marca, string imagen, int precio);
+            (int id, string nombre, string modelo, string marca, string imagen, int precio);
 
         Task<bool> EditarCuboAsync
             (string nombre, string modelo, string marca, string imagen, int precio);

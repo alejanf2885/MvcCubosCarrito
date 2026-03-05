@@ -31,10 +31,22 @@ namespace MvcCubosCarrito.Controllers
 
             return View(model);
         }
+        public IActionResult Insertar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Insertar(Cubo cubo)
+        {
+            bool resultado = await this._cuboService.InsertCuboAsync
+                (cubo.Id, cubo.Nombre, cubo.Modelo, cubo.Marca, cubo.Imagen, cubo.Precio);
+            return RedirectToAction("Index");
+        }
 
         public async Task<IActionResult> AddCarrito(int id)
         {
-            this._carritoService.AddCubo(id);
+            await  this._carritoService.AddCuboAsync(id);
 
             return RedirectToAction("Index");
         }

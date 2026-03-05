@@ -35,9 +35,11 @@ namespace MvcCubosCarrito.Services.CuboServ
             return cubos;
         }
 
-        public Task<bool> InsertCuboAsync(string nombre, string modelo, string marca, string imagen, int precio)
+        public async Task<bool> InsertCuboAsync(int id, string nombre, string modelo, string marca, string imagen, int precio)
         {
-            throw new NotImplementedException();
+
+            bool resultado =await this._cuboRepo.InsertCuboAsync(id, nombre, modelo, marca, imagen, precio);
+            return resultado;
         }
     }
 }

@@ -44,9 +44,22 @@ namespace MvcCubosCarrito.Repositories.CubosRepo
             return cubos;
         }
 
-        public Task<bool> InsertCuboAsync(string nombre, string modelo, string marca, string imagen, int precio)
+        public async Task<bool> InsertCuboAsync(int id, string nombre, string modelo, string marca, string imagen, int precio)
         {
-            throw new NotImplementedException();
+            Cubo cubo = new Cubo();
+            cubo.Id = id;
+            cubo.Nombre = nombre;
+            cubo.Modelo = modelo;
+            cubo.Marca = marca;
+            cubo.Imagen = imagen;
+            cubo.Precio = precio;
+
+            await this._context.AddAsync(cubo);
+
+            int filasAfectadas = await _context.SaveChangesAsync();
+
+            return filasAfectadas > 0;
+
         }
     }
 }

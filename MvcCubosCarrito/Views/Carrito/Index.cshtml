@@ -1,9 +1,6 @@
 ﻿@model Carrito
 
-
 <h1>Carrito</h1>
-
-
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">🧊 Carrito de Cubos</h1>
@@ -17,7 +14,8 @@
                         <th>Nombre</th>
                         <th>Modelo</th>
                         <th>Marca</th>
-                        <th>Precio</th>
+                        <th>Precio Total</th>
+                        <th>Cantidad</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -25,33 +23,50 @@
                     @foreach (CuboCarrito cubo in Model.cubos)
                     {
                         <tr>
-                          
                             <td class="fw-bold">@cubo.Nombre</td>
                             <td>@cubo.Modelo</td>
                             <td>
                                 <span class="badge bg-secondary">@cubo.Marca</span>
                             </td>
                             <td class="text-success fw-semibold">
-                                @cubo.Precio €
+                                @String.Format("{0:C}", cubo.PrecioTotal)
+                            </td>
+                            <td class="text-success fw-semibold">
+                                @cubo.Cantidad
                             </td>
                             <td>
-                                <a asp-action="AddCarrito"
-                                   asp-controller="Cubo"
+                                <a asp-action="DeleteCuboCarrito"
+                                   asp-controller="Carrito"
                                    asp-route-id="@cubo.Id"
-                                   class="btn btn-primary btn-sm">
-                                    🛒 Añadir al carrito
+                                   class="btn btn-danger btn-sm">
+                                    Quitar
                                 </a>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+
+            <!-- Total del carrito -->
+            <div class="d-flex justify-content-end mt-4">
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total del Carrito</h5>
+                        <p class="card-text display-6 text-success fw-bold">
+                            @String.Format("{0:C}", Model.cubos.Sum(c => c.PrecioTotal))
+                        </p>
+                        <a asp-action="Checkout" asp-controller="Carrito" class="btn btn-primary w-100">
+                            Proceder al pago
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     }
     else
     {
         <div class="alert alert-warning text-center">
-            😢 No hay cubos disponibles
+            😢 No hay cubos en tu carrito
         </div>
     }
 </div>
