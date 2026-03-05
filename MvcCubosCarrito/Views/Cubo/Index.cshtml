@@ -1,0 +1,57 @@
+﻿@model List<Cubo>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🧊 Catálogo de Cubos</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped align-middle shadow">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (Cubo cubo in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/imgaes/cubos/@cubo.Imagen"
+                                     class="img-thumbnail"
+                                     style="width:100px;height:100px;object-fit:cover;" />
+                            </td>
+                            <td class="fw-bold">@cubo.Nombre</td>
+                            <td>@cubo.Modelo</td>
+                            <td>
+                                <span class="badge bg-secondary">@cubo.Marca</span>
+                            </td>
+                            <td class="text-success fw-semibold">
+                                @cubo.Precio €
+                            </td>
+                            <td>
+                                <a asp-action="AddCarrito"
+                                   asp-controller="Cubo"
+                                   asp-route-id="@cubo.Id"
+                                   class="btn btn-primary btn-sm">
+                                    🛒 Añadir al carrito
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            😢 No hay cubos disponibles
+        </div>
+    }
+</div>
